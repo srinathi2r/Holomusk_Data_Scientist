@@ -143,4 +143,5 @@ merged_data = left_join(merged_data, agg_ldl_data, by = "id")
 merged_data = left_join(merged_data, agg_drugs_data, by = "id")
 merged_data = left_join(merged_data, stage_data, by = "id")
 
+setwd("/Users/srinath/Downloads/dataScienceTask/Holomusk_Data_Scientist/")
 save(merged_data, file = "merged_data.RData")
