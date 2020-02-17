@@ -2,12 +2,12 @@
 
 rm(list =ls())
 library(caret)
-library(randomForest)
 library(dplyr)
 library(plyr)
 library(pROC)
 library(tidyr)
 library(xgboost)
+library(ggplot2)
 setwd("/Users/srinath/Downloads/dataScienceTask/Holomusk_Data_Scientist/")
 
 ## Loading the dataset
@@ -67,15 +67,14 @@ pre = ifelse(pre>0.5,1,0)
 
 ###Performance Metrics
 metric = confusionMatrix(as.factor(pre), labels_test, positive = "1")
-metric
 acc = metric$overall[1]
 sens = sensitivity(factor(pre), labels_test)
 spec = specificity(factor(pre), labels_test)
 r.roc = roc(labels_test, as.numeric(pre))
-plot(r.roc, print.thres = "best", print.thres.best.method = "closest.topleft", ret = c("threshold", "accuracy"),
-     main = "ROC Plot - Random Forest")
 auc = r.roc$auc
 
 ### Variable Importance
 importance_matrix <- xgb.importance(colnames(train_data), model = sol)
-xgb.plot.importance(importance_matrix, rel_to_first = TRUE, xlab = "Relative importance")
+xgb.ggplt = xgb.ggplot.importance(importance_matrix, rel_to_first = TRUE, xlab = "Relative importance", top_n = 10)
+xgb.ggplt+theme( text = element_text(size = 20),
+                 axis.text.x = element_text(size = 15, angle = 45, hjust = 1))

@@ -84,7 +84,7 @@ agg_creat_data = creat_data %>% group_by(id) %>%
             first_creat = first(value),
             latest_creat = last(value))
 
-# Computing the change in Creatnine levels from the first to last readings
+# Computing the change in Creatinine levels from the first to last readings
 agg_creat_data = agg_creat_data %>% mutate(change_in_creat = latest_creat - first_creat)
 
 

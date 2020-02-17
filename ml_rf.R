@@ -45,7 +45,7 @@ spec = specificity(factor(pre), labels_test)
 
 ### Variable Importance
 importance_matrix = varImp(sol,useModel = FALSE, nonpara = TRUE, scale = T)
-varImpPlot(sol, sort = T, n.var=min(15, nrow(sol$importance)), type = 1, rex.labels = 3)
+varImpPlot(sol, sort = T, n.var=min(15, nrow(sol$importance)), type = 2, rex.labels = 3)
 
 r.roc = roc(labels_test, as.numeric(pre))
 r.roc$auc
